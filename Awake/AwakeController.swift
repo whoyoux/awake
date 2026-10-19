@@ -27,6 +27,16 @@ final class AwakeController {
         ) { [weak self] _ in
             MainActor.assumeIsolated { self?.checkExpiry() }
         }
+
+        #if DEBUG
+        // Debug builds only: `-AwakeStartSeconds N` turns Awake on at launch
+        // (N > 0 for a timed session, 0 for until turned off), so the
+        // assertion and timer can be checked from the shell with
+        // `pmset -g assertions` without clicking the menu bar.
+        if let seconds = UserDefaults.standard.string(forKey: "AwakeStartSeconds").flatMap(Double.init) {
+            turnOn(for: seconds > 0 ? seconds : nil)
+        }
+        #endif
     }
 
     /// Turns Awake on. `duration == nil` means until turned off.
