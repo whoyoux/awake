@@ -9,9 +9,7 @@ struct AwakeApp: App {
         MenuBarExtra {
             MenuContentView(controller: controller, loginItem: loginItem)
         } label: {
-            // SF Symbols render as template images in the menu bar, so the
-            // icon follows light and dark mode automatically.
-            Image(systemName: controller.isActive ? "cup.and.saucer.fill" : "cup.and.saucer")
+            Image(nsImage: controller.isActive ? MenuBarIcon.on : MenuBarIcon.off)
                 .accessibilityLabel(controller.isActive ? "Awake: on" : "Awake: off")
         }
         // A window-style panel (rather than a plain menu) lets the elapsed and
