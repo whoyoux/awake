@@ -43,8 +43,18 @@ GitHub Releases.
   General > Login Items).
 - `Awake/MenuContentView.swift`: the panel. It is a window-style
   `MenuBarExtra` so the timers update live while it is open.
-- `scripts/make-icon.swift`: draws the app icon PNGs with AppKit
-  (`swift scripts/make-icon.swift` from the repo root).
+- `Awake/AppIcon.icon`: the app icon as an Icon Composer bundle (espresso
+  gradient fill + cup artwork layer). Xcode builds the Liquid Glass icon for
+  macOS 26+ and `AppIcon.icns` for older systems from it.
+- `scripts/generate-icon-artwork.mjs`: generates cup artwork candidates
+  with `openai/gpt-image-1` through OpenRouter (plain Node, prompt written
+  out in the script in the SnapAI style, no npm packages). Needs
+  `OPENROUTER_API_KEY` in the gitignored `.env.icons.local` at the repo
+  root; each run costs money (about $0.50 for 3 images). Candidates go to
+  `build/icon-candidates/`.
+- `scripts/make-icon.swift`: `--artwork <png>` writes `Awake/AppIcon.icon`
+  around a chosen candidate; `preview <png> <candidates>...` renders
+  candidates as icons for choosing. It can also draw a cup itself (no AI).
 
 ## Building and checking
 

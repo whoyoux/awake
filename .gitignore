@@ -8,3 +8,4 @@ xcuserdata/
 *.mobileprovision
 *.provisionprofile
 .env
+.env.*.local
