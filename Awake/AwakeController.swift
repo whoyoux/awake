@@ -11,6 +11,9 @@ final class AwakeController {
     private(set) var startDate: Date?
     /// End of a timed session; `nil` while on "until turned off".
     private(set) var endDate: Date?
+    /// The preset chosen for the current timed session; `nil` while on
+    /// "until turned off" or off.
+    private(set) var duration: TimeInterval?
     private(set) var lastError: String?
 
     var isActive: Bool { startDate != nil }
@@ -53,6 +56,7 @@ final class AwakeController {
         timer?.invalidate()
         timer = nil
 
+        self.duration = duration
         if let duration {
             let end = Date().addingTimeInterval(duration)
             endDate = end
@@ -73,10 +77,17 @@ final class AwakeController {
         assertion = nil
         startDate = nil
         endDate = nil
+        duration = nil
     }
 
     func toggle() {
         isActive ? turnOff() : turnOn()
+    }
+
+    /// Fraction of the current timed session that has passed, 0...1.
+    func progress(at date: Date) -> Double {
+        guard let endDate, let duration, duration > 0 else { return 0 }
+        return min(1, max(0, 1 - endDate.timeIntervalSince(date) / duration))
     }
 
     private func checkExpiry() {
