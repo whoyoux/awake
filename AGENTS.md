@@ -45,16 +45,9 @@ GitHub Releases.
   `MenuBarExtra` so the timers update live while it is open.
 - `Awake/AppIcon.icon`: the app icon as an Icon Composer bundle (espresso
   gradient fill + cup artwork layer). Xcode builds the Liquid Glass icon for
-  macOS 26+ and `AppIcon.icns` for older systems from it.
-- `scripts/generate-icon-artwork.mjs`: generates cup artwork candidates
-  with `openai/gpt-image-1` through OpenRouter (plain Node, prompt written
-  out in the script in the SnapAI style, no npm packages). Needs
-  `OPENROUTER_API_KEY` in the gitignored `.env.icons.local` at the repo
-  root; each run costs money (about $0.50 for 3 images). Candidates go to
-  `build/icon-candidates/`.
-- `scripts/make-icon.swift`: `--artwork <png>` writes `Awake/AppIcon.icon`
-  around a chosen candidate; `preview <png> <candidates>...` renders
-  candidates as icons for choosing. It can also draw a cup itself (no AI).
+  macOS 26+ and `AppIcon.icns` for older systems from it. The cup artwork
+  was generated once with an image model (gpt-image-1); to change it, edit
+  the bundle in Xcode's Icon Composer.
 
 ## Building and checking
 
