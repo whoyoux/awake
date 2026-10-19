@@ -4,8 +4,20 @@ A tiny macOS menu bar app that keeps your Mac and its display awake.
 
 Click the cup in the menu bar to turn Awake on, either until you turn it
 off or for a set time (30 min, 1 h, 2 h, 4 h, 8 h). While it is on, the
-panel shows how long it has been running and, for timed sessions, how much
-time is left. The cup is filled while Awake is on and empty while it is off.
+panel shows how much time is left with a progress bar, or how long it has
+been running when it is on until turned off. The cup turns orange and
+steams while Awake is on.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/panel-on-dark.png">
+    <img src="docs/screenshots/panel-on-light.png" width="346" alt="Awake panel while on: 1:24:06 left of a 2-hour session, with a progress bar and the 2h duration highlighted in orange">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/panel-off-dark.png">
+    <img src="docs/screenshots/panel-off-light.png" width="346" alt="Awake panel while off: the durations 30m, 1h, 2h, 4h, 8h and infinity">
+  </picture>
+</p>
 
 Awake adds itself to your login items the first time you open it from
 the Applications folder, so it is in the menu bar after every restart.
