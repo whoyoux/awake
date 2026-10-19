@@ -7,6 +7,9 @@ off or for a set time (30 min, 1 h, 2 h, 4 h, 8 h). While it is on, the
 panel shows how long it has been running and, for timed sessions, how much
 time is left. The cup is filled while Awake is on and empty while it is off.
 
+Tick **Open at Login** in the panel to have Awake in the menu bar after
+every restart.
+
 ## How it works
 
 Awake holds an IOKit power assertion of type

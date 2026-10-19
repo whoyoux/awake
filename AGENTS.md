@@ -17,7 +17,9 @@ the Mac App Store (free) and lives in a public GitHub repository.
 - v1 scope: turn on / off; turn on for a preset time (30 min, 1 h, 2 h,
   4 h, 8 h) or until turned off; live elapsed time (and time left for timed
   sessions); a menu bar icon showing the state in light and dark mode.
-  No "Open at login" in v1.
+  "Open at Login" checkbox (added at the owner's request, 19 Oct 2026),
+  off by default: App Review guideline 2.4.5 requires the user's consent
+  before an app launches itself at login.
 - Use `PreventUserIdleDisplaySleep` (like `caffeinate -d`), not a spawned
   `caffeinate` process.
 - Licence: MIT.
@@ -33,6 +35,9 @@ the Mac App Store (free) and lives in a public GitHub repository.
   end time on wake (timers do not count time while the Mac sleeps).
 - `Awake/PowerAssertion.swift`: wraps `IOPMAssertionCreateWithName` /
   `IOPMAssertionRelease`.
+- `Awake/LoginItem.swift`: "Open at Login" via `SMAppService.mainApp`
+  (works in the sandbox; the user can also change it in System Settings >
+  General > Login Items).
 - `Awake/MenuContentView.swift`: the panel. It is a window-style
   `MenuBarExtra` so the timers update live while it is open.
 - `scripts/make-icon.swift`: draws the app icon PNGs with AppKit

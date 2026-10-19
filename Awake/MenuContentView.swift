@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuContentView: View {
     let controller: AwakeController
+    let loginItem: LoginItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -38,6 +39,19 @@ struct MenuContentView: View {
             }
 
             Divider()
+
+            Toggle("Open at Login", isOn: Binding(
+                get: { loginItem.isEnabled },
+                set: { loginItem.setEnabled($0) }
+            ))
+            .toggleStyle(.checkbox)
+            .onAppear { loginItem.refresh() }
+
+            if let error = loginItem.lastError {
+                Text(error)
+                    .font(.caption)
+                    .foregroundStyle(.red)
+            }
 
             Button("Quit Awake") { NSApplication.shared.terminate(nil) }
                 .keyboardShortcut("q")

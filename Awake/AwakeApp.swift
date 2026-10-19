@@ -3,10 +3,11 @@ import SwiftUI
 @main
 struct AwakeApp: App {
     @State private var controller = AwakeController()
+    @State private var loginItem = LoginItem()
 
     var body: some Scene {
         MenuBarExtra {
-            MenuContentView(controller: controller)
+            MenuContentView(controller: controller, loginItem: loginItem)
         } label: {
             // SF Symbols render as template images in the menu bar, so the
             // icon follows light and dark mode automatically.
