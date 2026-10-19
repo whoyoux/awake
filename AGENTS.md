@@ -1,16 +1,19 @@
 # Agent notes for Awake
 
 Awake is a SwiftUI menu bar app (`MenuBarExtra`, no Dock icon) that keeps
-the Mac and display awake with an IOKit power assertion. It is meant for
-the Mac App Store (free) and lives in a public GitHub repository.
+the Mac and display awake with an IOKit power assertion. It is free,
+open source (public GitHub repo `whoyoux/awake`) and distributed as
+GitHub Releases.
 
 ## Owner's decisions
 
 - Name **Awake**, bundle id `dev.whxx.awake`, Apple Developer team
-  `73SQTP34GN` (individual account; the store seller name is the owner's
-  legal name).
-- Distribution: Mac App Store, free. App Sandbox on; no extra entitlements
-  are needed for power assertions.
+  `73SQTP34GN` (individual account).
+- Distribution: **GitHub Releases**, not the Mac App Store (owner's
+  decision, 19 Oct 2026). Releases are Developer ID signed, notarized and
+  stapled zips made by `scripts/release.sh`. App Sandbox stays on (not
+  required outside the store, but nothing needs to leave it). No
+  auto-updater: Sparkle would be a third-party dependency.
 - Minimum macOS **14 Sonoma**: `MenuBarExtra` needs 13, and 14 adds the
   Observation framework (`@Observable`) used by `AwakeController`. 14 runs
   on Macs from 2018 on.
@@ -71,13 +74,17 @@ pmset -g assertions | grep Awake   # present now, gone after 15 s
   `Co-Authored-By:` line for the agent.
 - Verify before calling something done (build it, run it, look at it), and
   say plainly what could not be verified.
-- Ask before anything public-facing: pushing to the public repo, App Store
-  submission.
+- Ask before anything public-facing: pushing to the public repo,
+  publishing a GitHub release.
 
-## Mac App Store checklist
+## Releasing
 
-- App icon (asset catalog; currently a generated placeholder).
-- App Store Connect record: description, screenshots, category Utilities,
-  privacy policy URL, support URL (a small static page, e.g. on `whxx.dev`).
-- Privacy nutrition label: Data Not Collected.
-- Archive in Xcode (Release), upload, App Review.
+1. One-time, by the owner: create a "Developer ID Application" certificate
+   (Xcode > Settings > Accounts > Manage Certificates) and store notary
+   credentials with `xcrun notarytool store-credentials awake-notary
+   --apple-id <apple id> --team-id 73SQTP34GN`.
+2. Bump `MARKETING_VERSION` (and `CURRENT_PROJECT_VERSION`) in the project.
+3. `scripts/release.sh` archives, exports with Developer ID, notarizes,
+   staples and writes `build/release/Awake-<version>.zip`.
+4. After the owner agrees: `gh release create v<version> <zip> --title
+   "Awake <version>" --generate-notes`.

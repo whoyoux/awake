@@ -7,8 +7,16 @@ off or for a set time (30 min, 1 h, 2 h, 4 h, 8 h). While it is on, the
 panel shows how long it has been running and, for timed sessions, how much
 time is left. The cup is filled while Awake is on and empty while it is off.
 
-Tick **Open at Login** in the panel to have Awake in the menu bar after
-every restart.
+Awake adds itself to your login items the first time you open it from
+the Applications folder, so it is in the menu bar after every restart.
+Untick **Open at Login** in the panel to stop that.
+
+## Install
+
+Download `Awake-<version>.zip` from the
+[latest release](https://github.com/whoyoux/awake/releases/latest), unzip
+it and move `Awake.app` to your Applications folder. Releases are signed
+with a Developer ID and notarized by Apple.
 
 ## How it works
 
@@ -42,6 +50,9 @@ xcodebuild -project Awake.xcodeproj -scheme Awake -configuration Debug -derivedD
 ```
 
 The app has no third-party dependencies.
+
+Release builds are made with `scripts/release.sh` (see the comment at its
+top for the one-time signing and notarization setup).
 
 ## Privacy
 
