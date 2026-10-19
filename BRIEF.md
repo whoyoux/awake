@@ -14,12 +14,17 @@ While PlantCare builds run locally (15–20 min `eas build --local`) the owner k
 - **Git from day one**; this folder is the repo (`main`). Remote (GitHub) to be decided with the owner.
 - **Developer account:** Apple Developer Program, **individual**: the seller name on the store is the owner's legal name (fine). Team ID `73SQTP34GN` (same team as PlantCare).
 
-## Still to decide with the owner (ask before building)
+## Decided with the owner (19 Oct 2026)
 
-1. **Name** (must be unique on the Mac App Store) and bundle id (PlantCare uses `dev.whxx.<app>`, so likely `dev.whxx.<name>`).
-2. **Features for v1:** plain on/off toggle only, or also a timer (1 h / 2 h / until turned off) and "Open at login" (`SMAppService`, allowed in the store). Also: keep only the system awake, or the display too (`caffeinate -dims` kept both).
-3. Minimum macOS version (suggest 14) and universal build (Apple silicon + Intel).
-4. GitHub repo: public with a licence (e.g. MIT) or private.
+- **Name:** Awake. **Bundle id:** `dev.whxx.awake`.
+- **v1 features:**
+  - Turn on / turn off from the menu bar.
+  - Turn on for a set time, with a few presets (e.g. 30 min, 1 h, 2 h, 4 h, 8 h) plus "until turned off".
+  - While on, show how long it has been running (a live elapsed-time counter in the menu; for timed sessions also the time left).
+  - Block **display sleep too** (like `caffeinate -dims`): use a display-sleep assertion, which also keeps the system awake.
+  - No "Open at login" in v1.
+- **Minimum macOS:** whatever the chosen APIs need, kept as low as reasonable. Proposal: macOS 14 Sonoma (MenuBarExtra needs 13; 14 adds `@Observable` and covers Macs from 2018 on). Tell the owner the final choice and why.
+- **GitHub repo: public**, with a licence (propose MIT and confirm before the first push). Confirm before creating the remote and pushing.
 
 ## Mac App Store checklist
 
